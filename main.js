@@ -26,17 +26,35 @@ playerCharacter.addItemToInventory(basicSword);
 // Equip the sample item
 playerCharacter.equipItem(basicSword);
 
+// Get references to HTML elements
+const clickButton = document.getElementById('click-button');
+const resourceDisplay = document.getElementById('resource-display');
+
+// Attach click event listener to the button
+clickButton.addEventListener('click', () => {
+    gameState.addResource('gold', 1); // Add 1 gold per click
+    console.log('Clicked! Gold:', gameState.getResource('gold'));
+    updateResourceDisplay(); // Update display after resource change
+});
+
+// Function to update the resource display
+function updateResourceDisplay() {
+    if (resourceDisplay) {
+        resourceDisplay.textContent = `Gold: ${gameState.getResource('gold').toFixed(2)}`;
+    }
+}
 
 // Initialize game loop
 const gameLoop = new GameLoop(gameState);
+
+// Modify the game loop's render method to update the display
+gameLoop.render = () => {
+    updateResourceDisplay();
+    // Add rendering for other game elements here
+};
+
 
 // Start the game loop
 gameLoop.start();
 
 console.log("Game initialized and loop started.");
-
-// Simple click interaction example (for demonstration)
-document.addEventListener('click', () => {
-    gameState.addResource('gold', 1); // Add 1 gold per click
-    console.log('Clicked! Gold:', gameState.getResource('gold'));
-});
