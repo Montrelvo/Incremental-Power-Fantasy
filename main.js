@@ -1,24 +1,7 @@
-import { GameScene } from './scenes/GameScene';
+import config from './phaser.config.js'; // Import the configuration
+// import { GameScene } from './scenes/GameScene'; // The scene is now defined in the config
 
-// Game configuration
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    scene: GameScene,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 },
-            debug: false
-        }
-    },
-    canvas: {
-        willReadFrequently: true // Add this line to address the Canvas2D warning
-    }
-};
-
-// Create a new Phaser game instance
+// Create a new Phaser game instance using the imported config
 const game = new Phaser.Game(config);
 
 console.log("Phaser game initialized.");
